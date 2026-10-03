@@ -1,0 +1,2078 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apna School Zindabad - Multi-Theme Pro School Management System</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- FontAwesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Plus Jakarta Sans', 'sans-serif'],
+                        display: ['Outfit', 'sans-serif'],
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        /* Preset 1: Emerald Modern (Default) */
+        :root {
+            --bg-main: #061814;
+            --bg-card: rgba(13, 38, 32, 0.75);
+            --bg-modal: rgba(8, 25, 21, 0.95);
+            --border-color: rgba(16, 185, 129, 0.2);
+            --text-primary: #f0fdf4;
+            --text-secondary: #9ca3af;
+            --accent-primary: #10b981;
+            --accent-hover: #059669;
+            --accent-light: rgba(16, 185, 129, 0.15);
+            --badge-bg: #022c22;
+            --badge-text: #34d399;
+            --header-bg: rgba(4, 18, 15, 0.85);
+            --sidebar-bg: #03120f;
+        }
+
+        /* Preset 2: Dark Cyber Luxury */
+        body.theme-cyber {
+            --bg-main: #0a071b;
+            --bg-card: rgba(23, 15, 48, 0.75);
+            --bg-modal: rgba(15, 9, 36, 0.95);
+            --border-color: rgba(139, 92, 246, 0.25);
+            --text-primary: #f3e8ff;
+            --text-secondary: #a78bfa;
+            --accent-primary: #8b5cf6;
+            --accent-hover: #7c3aed;
+            --accent-light: rgba(139, 92, 246, 0.18);
+            --badge-bg: #2e1065;
+            --badge-text: #c084fc;
+            --header-bg: rgba(10, 7, 27, 0.88);
+            --sidebar-bg: #060412;
+        }
+
+        /* Preset 3: Clean Minimal Light */
+        body.theme-light {
+            --bg-main: #f8fafc;
+            --bg-card: rgba(255, 255, 255, 0.85);
+            --bg-modal: rgba(255, 255, 255, 0.98);
+            --border-color: rgba(203, 213, 225, 0.8);
+            --text-primary: #0f172a;
+            --text-secondary: #475569;
+            --accent-primary: #0284c7;
+            --accent-hover: #0369a1;
+            --accent-light: rgba(2, 132, 199, 0.12);
+            --badge-bg: #e0f2fe;
+            --badge-text: #0369a1;
+            --header-bg: rgba(255, 255, 255, 0.9);
+            --sidebar-bg: #ffffff;
+        }
+
+        /* Preset 4: Royal Crimson & Gold */
+        body.theme-crimson {
+            --bg-main: #19080c;
+            --bg-card: rgba(43, 14, 21, 0.75);
+            --bg-modal: rgba(28, 8, 13, 0.96);
+            --border-color: rgba(244, 63, 94, 0.25);
+            --text-primary: #fff1f2;
+            --text-secondary: #fda4af;
+            --accent-primary: #f43f5e;
+            --accent-hover: #e11d48;
+            --accent-light: rgba(244, 63, 94, 0.18);
+            --badge-bg: #4c0519;
+            --badge-text: #fb7185;
+            --header-bg: rgba(22, 6, 10, 0.88);
+            --sidebar-bg: #120407;
+        }
+
+        body {
+            background-color: var(--bg-main);
+            color: var(--text-primary);
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            min-height: 100vh;
+        }
+
+        .theme-card {
+            background-color: var(--bg-card);
+            border: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+            -webkit-backdrop-filter: blur(12px);
+        }
+
+        .theme-sidebar {
+            background-color: var(--sidebar-bg);
+            border-right: 1px solid var(--border-color);
+        }
+
+        .theme-header {
+            background-color: var(--header-bg);
+            border-bottom: 1px solid var(--border-color);
+            backdrop-filter: blur(12px);
+        }
+
+        .theme-modal {
+            background-color: var(--bg-modal);
+            border: 1px solid var(--border-color);
+            color: var(--text-primary);
+        }
+
+        .btn-accent {
+            background-color: var(--accent-primary);
+            color: #ffffff;
+            transition: all 0.2s ease;
+        }
+
+        .btn-accent:hover {
+            background-color: var(--accent-hover);
+            transform: translateY(-1px);
+        }
+
+        .text-accent {
+            color: var(--accent-primary);
+        }
+
+        .badge-accent {
+            background-color: var(--badge-bg);
+            color: var(--badge-text);
+            border: 1px solid var(--border-color);
+        }
+
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(0, 0, 0, 0.1);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: var(--accent-primary);
+            border-radius: 4px;
+            opacity: 0.5;
+        }
+
+        @media print {
+            .no-print { display: none !important; }
+            .print-only { display: block !important; }
+            body { background: white !important; color: black !important; }
+            .theme-card, .theme-modal { background: white !important; border: 1px solid #ccc !important; color: black !important; }
+        }
+    </style>
+</head>
+<body class="antialiased min-h-screen flex flex-col">
+
+    <!-- LOGIN SCREEN -->
+    <div id="loginSection" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md overflow-y-auto">
+        <div class="w-full max-w-4xl my-auto theme-modal rounded-3xl shadow-2xl overflow-hidden flex flex-col">
+            
+            <!-- Header -->
+            <div class="p-8 text-center border-b border-emerald-500/20 relative bg-gradient-to-r from-black/40 via-transparent to-black/40">
+                <div class="inline-flex items-center justify-center w-20 h-20 rounded-2xl badge-accent mb-3 shadow-inner">
+                    <i class="fa-solid fa-graduation-cap text-4xl text-accent"></i>
+                </div>
+                <h1 class="text-3xl font-extrabold tracking-tight font-display">APNA SCHOOL ZINDABAD</h1>
+                <p class="text-xs uppercase font-bold tracking-widest text-accent mt-1">Multi-Theme Pro Management System</p>
+                
+                <!-- Theme Palette Buttons on Login Page -->
+                <div class="mt-4 flex items-center justify-center space-x-2">
+                    <span class="text-[11px] uppercase font-bold text-slate-400 mr-2">Theme Preset:</span>
+                    <button onclick="setThemePreset('emerald')" title="Emerald Modern" class="w-6 h-6 rounded-full bg-emerald-500 border-2 border-white shadow hover:scale-110 transition-transform"></button>
+                    <button onclick="setThemePreset('cyber')" title="Dark Cyber Luxury" class="w-6 h-6 rounded-full bg-purple-600 border-2 border-white shadow hover:scale-110 transition-transform"></button>
+                    <button onclick="setThemePreset('light')" title="Clean Minimal Light" class="w-6 h-6 rounded-full bg-sky-500 border-2 border-slate-800 shadow hover:scale-110 transition-transform"></button>
+                    <button onclick="setThemePreset('crimson')" title="Royal Crimson & Gold" class="w-6 h-6 rounded-full bg-rose-600 border-2 border-white shadow hover:scale-110 transition-transform"></button>
+                </div>
+            </div>
+
+            <!-- Login Inputs & Autofill Grid -->
+            <div class="p-6 md:p-8 space-y-6">
+                <div id="loginAlert" class="hidden p-3 rounded-xl text-xs font-semibold"></div>
+
+                <form id="loginForm" onsubmit="handleLogin(event)" class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Portal Role</label>
+                        <select id="loginRole" class="w-full px-4 py-3 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none focus:border-emerald-500" onchange="renderCredentialTabs()">
+                            <option value="admin">Admin Portal (Pass: 2233)</option>
+                            <option value="teacher">Teacher Portal (Pass: 1122)</option>
+                            <option value="student">Student Portal (Pass: 3344)</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Email Address</label>
+                        <input type="email" id="loginEmail" required class="w-full px-4 py-3 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="admin1@apnaschool.com">
+                    </div>
+
+                    <div>
+                        <label class="block text-xs font-bold uppercase tracking-wider mb-2 opacity-80">Password Pin</label>
+                        <input type="password" id="loginPassword" required class="w-full px-4 py-3 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="••••">
+                    </div>
+
+                    <div class="md:col-span-3 pt-2">
+                        <button type="submit" class="w-full py-3.5 btn-accent font-bold rounded-xl shadow-lg text-xs uppercase tracking-wider">
+                            Access Portal <i class="fa-solid fa-right-to-bracket ml-2"></i>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- CREDENTIALS DIRECTORY FOR QUICK TESTING -->
+                <div class="pt-6 border-t border-slate-800/80 space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h3 class="text-xs font-bold uppercase tracking-wider opacity-90">
+                            <i class="fa-solid fa-users-gear text-accent mr-2"></i> Pre-loaded Accounts Directory (Click Autofill to Login)
+                        </h3>
+                        <div class="flex space-x-1" id="credRoleTabs">
+                            <!-- Populated with role buttons -->
+                        </div>
+                    </div>
+
+                    <div class="bg-black/30 border border-slate-800/80 rounded-2xl p-4 max-h-56 overflow-y-auto">
+                        <div id="credentialAccountsGrid" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-2.5">
+                            <!-- Loaded via JS -->
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- MAIN APPLICATION WORKSPACE -->
+    <div id="appSection" class="hidden flex-1 flex flex-col md:flex-row min-h-screen">
+
+        <!-- SIDEBAR NAVIGATION -->
+        <aside class="w-full md:w-64 theme-sidebar flex-shrink-0 flex flex-col no-print">
+            <div class="p-5 border-b border-slate-800/80 flex items-center space-x-3">
+                <div class="w-10 h-10 rounded-xl btn-accent flex items-center justify-center font-black text-lg shadow">
+                    AS
+                </div>
+                <div>
+                    <h2 class="font-black text-sm leading-tight font-display">APNA SCHOOL</h2>
+                    <span id="userRoleBadge" class="text-[10px] font-bold text-accent uppercase tracking-widest badge-accent px-2 py-0.5 rounded">ADMIN</span>
+                </div>
+            </div>
+
+            <!-- Profile Widget -->
+            <div class="p-4 mx-3 my-3 theme-card rounded-2xl flex items-center space-x-3 cursor-pointer hover:border-emerald-500/50 transition-all" onclick="switchTab('profile')" title="Click to view & edit profile">
+                <div id="userAvatarContainer" class="relative">
+                    <div id="userAvatar" class="w-10 h-10 rounded-xl badge-accent text-accent flex items-center justify-center font-bold text-base border overflow-hidden">
+                        U
+                    </div>
+                </div>
+                <div class="overflow-hidden flex-1">
+                    <p id="userNameDisplay" class="font-bold text-xs truncate">User Name</p>
+                    <p id="userEmailDisplay" class="text-[10px] opacity-70 truncate">user@apnaschool.com</p>
+                </div>
+                <i class="fa-solid fa-gear text-xs text-accent opacity-60 hover:opacity-100"></i>
+            </div>
+
+            <!-- Nav Links -->
+            <nav class="flex-1 p-3 space-y-1.5 overflow-y-auto" id="sideNav">
+                <!-- Loaded via JS -->
+            </nav>
+
+            <div class="p-4 border-t border-slate-800/80">
+                <button onclick="handleLogout()" class="w-full flex items-center justify-center space-x-2 px-3 py-2.5 rounded-xl text-xs font-bold text-rose-400 bg-rose-950/30 hover:bg-rose-900/40 border border-rose-900/40 transition-all">
+                    <i class="fa-solid fa-power-off"></i>
+                    <span>Log Out Session</span>
+                </button>
+            </div>
+        </aside>
+
+        <!-- MAIN DISPLAY CONTAINER -->
+        <main class="flex-1 flex flex-col min-w-0">
+            
+            <!-- TOP BAR HEADER -->
+            <header class="theme-header px-6 py-4 flex items-center justify-between no-print">
+                <div class="flex items-center space-x-3">
+                    <h1 id="pageTitle" class="text-xl font-black tracking-tight font-display">Dashboard Overview</h1>
+                </div>
+
+                <!-- Theme Switcher & Date Badge -->
+                <div class="flex items-center space-x-3">
+                    
+                    <!-- THEME PRESET SWITCHER SELECTOR -->
+                    <div class="relative group">
+                        <button class="px-3 py-2 theme-card rounded-xl text-xs font-bold flex items-center space-x-2">
+                            <i class="fa-solid fa-palette text-accent"></i>
+                            <span class="hidden sm:inline">Theme</span>
+                            <i class="fa-solid fa-chevron-down text-[10px] opacity-70"></i>
+                        </button>
+                        <div class="absolute right-0 mt-2 w-48 theme-modal rounded-2xl shadow-2xl p-2 hidden group-hover:block z-50 border">
+                            <p class="text-[10px] font-bold uppercase tracking-wider px-3 py-1 opacity-70 border-b border-slate-800 mb-1">Select Theme</p>
+                            <button onclick="setThemePreset('emerald')" class="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-emerald-500/10 flex items-center space-x-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-emerald-500"></span>
+                                <span>Emerald Modern</span>
+                            </button>
+                            <button onclick="setThemePreset('cyber')" class="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-purple-500/10 flex items-center space-x-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-purple-600"></span>
+                                <span>Dark Cyber Luxury</span>
+                            </button>
+                            <button onclick="setThemePreset('light')" class="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-sky-500/10 flex items-center space-x-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-sky-500"></span>
+                                <span>Clean Minimal Light</span>
+                            </button>
+                            <button onclick="setThemePreset('crimson')" class="w-full text-left px-3 py-2 text-xs font-bold rounded-xl hover:bg-rose-500/10 flex items-center space-x-2">
+                                <span class="w-3.5 h-3.5 rounded-full bg-rose-600"></span>
+                                <span>Royal Crimson</span>
+                            </button>
+                        </div>
+                    </div>
+
+                    <button onclick="switchTab('messages')" class="relative p-2.5 theme-card rounded-xl">
+                        <i class="fa-solid fa-bell text-sm text-accent"></i>
+                        <span id="unreadBadge" class="hidden absolute top-1.5 right-1.5 w-2 h-2 bg-rose-500 rounded-full animate-ping"></span>
+                    </button>
+
+                    <div class="text-xs font-semibold theme-card px-3.5 py-2 rounded-xl hidden sm:block">
+                        <i class="fa-regular fa-calendar-alt text-accent mr-2"></i><span id="currentDateText">--</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- TAB CONTENTS -->
+            <div class="flex-1 p-6 overflow-y-auto space-y-6">
+
+                <!-- TAB 1: DASHBOARD OVERVIEW -->
+                <div id="tab-dashboard" class="tab-content space-y-6">
+                    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
+                        <div class="theme-card p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Total Students</p>
+                                <h3 id="statStudents" class="text-3xl font-black mt-1 font-display">40</h3>
+                                <p class="text-[11px] text-accent font-semibold mt-1"><i class="fa-solid fa-layer-group mr-1"></i> Classes 1 to 5</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl badge-accent flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-user-graduate text-accent"></i>
+                            </div>
+                        </div>
+
+                        <div class="theme-card p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Faculty Teachers</p>
+                                <h3 id="statTeachers" class="text-3xl font-black mt-1 font-display">10</h3>
+                                <p class="text-[11px] text-accent font-semibold mt-1"><i class="fa-solid fa-chalkboard-user mr-1"></i> Active Staff</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl badge-accent flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-graduation-cap text-accent"></i>
+                            </div>
+                        </div>
+
+                        <div class="theme-card p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Exams Scheduled</p>
+                                <h3 id="statExams" class="text-3xl font-black mt-1 font-display">0</h3>
+                                <p class="text-[11px] text-amber-400 font-semibold mt-1"><i class="fa-solid fa-file-signature mr-1"></i> Active Papers</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl badge-accent flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-pen-nib text-accent"></i>
+                            </div>
+                        </div>
+
+                        <div class="theme-card p-5 rounded-2xl flex items-center justify-between">
+                            <div>
+                                <p class="text-xs font-bold uppercase tracking-wider opacity-70">Finance Overview</p>
+                                <h3 id="statFinance" class="text-3xl font-black mt-1 font-display">Rs 0</h3>
+                                <p id="statFinanceSub" class="text-[11px] text-emerald-400 font-semibold mt-1"><i class="fa-solid fa-coins mr-1"></i> Fees Collected</p>
+                            </div>
+                            <div class="w-12 h-12 rounded-2xl badge-accent flex items-center justify-center text-xl">
+                                <i class="fa-solid fa-wallet text-accent"></i>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Banner Card -->
+                    <div class="relative rounded-3xl overflow-hidden theme-card p-8 shadow-2xl border">
+                        <div class="relative z-10 max-w-2xl space-y-3">
+                            <span class="px-3 py-1 badge-accent rounded-full text-xs font-bold uppercase tracking-widest">
+                                Apna School Zindabad Portal
+                            </span>
+                            <h2 id="dashWelcomeTitle" class="text-3xl font-black leading-tight font-display">Welcome Back!</h2>
+                            <p id="dashWelcomeSubtitle" class="opacity-80 text-xs sm:text-sm leading-relaxed">
+                                Complete role-based management system with Fees & Salary processing, Exams, Attendance tracking, and Profile customization.
+                            </p>
+                            <div class="pt-2 flex flex-wrap gap-3" id="dashQuickButtons">
+                                <!-- Dynamic Buttons -->
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Personal Attendance Card -->
+                    <div id="dashPersonalAttendanceCard" class="hidden theme-card p-6 rounded-2xl">
+                        <h3 class="font-extrabold text-base mb-4 flex items-center font-display">
+                            <i class="fa-solid fa-chart-line text-accent mr-2"></i> My Personal Attendance Overview
+                        </h3>
+                        <div class="grid grid-cols-1 sm:grid-cols-3 gap-4 text-center">
+                            <div class="p-4 rounded-xl bg-emerald-500/10 border border-emerald-500/20">
+                                <span class="text-xs font-bold text-emerald-500 uppercase tracking-wider">Days Present</span>
+                                <p id="personalPresentCount" class="text-3xl font-black text-emerald-500 mt-1 font-display">0</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-rose-500/10 border border-rose-500/20">
+                                <span class="text-xs font-bold text-rose-500 uppercase tracking-wider">Days Absent</span>
+                                <p id="personalAbsentCount" class="text-3xl font-black text-rose-500 mt-1 font-display">0</p>
+                            </div>
+                            <div class="p-4 rounded-xl bg-sky-500/10 border border-sky-500/20">
+                                <span class="text-xs font-bold text-sky-500 uppercase tracking-wider">Attendance Percentage</span>
+                                <p id="personalRatePct" class="text-3xl font-black text-sky-500 mt-1 font-display">0%</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 2: ATTENDANCE MANAGEMENT -->
+                <div id="tab-attendance" class="tab-content hidden space-y-6">
+                    <!-- Admin Attendance Dashboard -->
+                    <div id="adminAttendanceControls" class="hidden theme-card p-6 rounded-2xl space-y-5">
+                        <div class="flex flex-col md:flex-row md:items-center justify-between gap-4 pb-4 border-b border-slate-800/80">
+                            <div>
+                                <h3 class="text-lg font-black font-display">Daily Attendance Marking Portal</h3>
+                                <p class="text-xs opacity-70 mt-0.5">Click Present or Absent buttons to mark attendance for Students or Teachers.</p>
+                            </div>
+                            <div class="flex flex-wrap items-center gap-3">
+                                <input type="date" id="attendanceDatePicker" class="px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none focus:border-emerald-500" onchange="loadAttendanceList()">
+                                <select id="attendanceTargetType" class="px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none focus:border-emerald-500" onchange="loadAttendanceList()">
+                                    <option value="students">Students Attendance (40)</option>
+                                    <option value="teachers">Teachers Attendance (10)</option>
+                                </select>
+                            </div>
+                        </div>
+
+                        <!-- Class Filter & Actions -->
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3">
+                            <div id="classFilterWrapper" class="flex items-center space-x-2">
+                                <span class="text-xs font-bold uppercase opacity-70">Class Filter:</span>
+                                <select id="attendanceClassFilter" class="px-3 py-1.5 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none" onchange="loadAttendanceList()">
+                                    <option value="All">All Classes (1 to 5)</option>
+                                    <option value="Class 1">Class 1</option>
+                                    <option value="Class 2">Class 2</option>
+                                    <option value="Class 3">Class 3</option>
+                                    <option value="Class 4">Class 4</option>
+                                    <option value="Class 5">Class 5</option>
+                                </select>
+                            </div>
+
+                            <button onclick="markAllAttendance('Present')" class="px-3.5 py-1.5 bg-emerald-600 hover:bg-emerald-500 text-white rounded-xl text-xs font-bold shadow">
+                                <i class="fa-solid fa-check-double mr-1"></i> Mark All Present
+                            </button>
+                        </div>
+
+                        <!-- Attendance Table -->
+                        <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-black/40 opacity-70 font-bold uppercase border-b border-slate-800/80">
+                                        <th class="py-3.5 px-4">Roll / ID</th>
+                                        <th class="py-3.5 px-4">Name</th>
+                                        <th class="py-3.5 px-4">Class / Role</th>
+                                        <th class="py-3.5 px-4 text-center">Attendance Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="attendanceMarkTable" class="divide-y divide-slate-800/60">
+                                    <!-- Rows -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Personal Attendance Log -->
+                    <div id="personalAttendanceView" class="hidden theme-card p-6 rounded-2xl space-y-4">
+                        <div class="flex items-center justify-between pb-4 border-b border-slate-800/80">
+                            <div>
+                                <h3 class="text-lg font-black font-display">My Attendance Log</h3>
+                                <p class="text-xs opacity-70">Official daily records updated by Admin.</p>
+                            </div>
+                            <span id="personalRoleTag" class="px-3 py-1 badge-accent text-xs font-bold rounded-full">STUDENT</span>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-black/40 opacity-70 uppercase font-bold border-b border-slate-800/80">
+                                        <th class="py-3 px-4">Date</th>
+                                        <th class="py-3 px-4">Day</th>
+                                        <th class="py-3 px-4">Status</th>
+                                        <th class="py-3 px-4">Updated By</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="personalAttendanceLogTable" class="divide-y divide-slate-800/60">
+                                    <!-- Dynamic Log -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 3: FEES & SALARY MANAGEMENT -->
+                <div id="tab-fees" class="tab-content hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-black font-display">Fees & Salary Management</h3>
+                            <p class="text-xs opacity-70">Track student tuition fee collections, salary disbursements, and print invoices.</p>
+                        </div>
+                        <!-- Tab filter buttons inside Fees module -->
+                        <div id="feesModuleSubTabs" class="flex space-x-2">
+                            <button id="btnFeesStudentsTab" onclick="switchFeesSubTab('students')" class="px-3.5 py-2 btn-accent rounded-xl text-xs font-bold shadow">
+                                <i class="fa-solid fa-user-graduate mr-1.5"></i> Student Fees
+                            </button>
+                            <button id="btnFeesTeachersTab" onclick="switchFeesSubTab('teachers')" class="px-3.5 py-2 theme-card rounded-xl text-xs font-bold opacity-70 hover:opacity-100">
+                                <i class="fa-solid fa-money-check-dollar mr-1.5"></i> Teacher Salaries
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- SUB-VIEW 1: STUDENT FEES (ADMIN VIEW & STUDENT VIEW) -->
+                    <div id="feesStudentsView" class="theme-card p-6 rounded-2xl space-y-5">
+                        <div id="adminFeesHeader" class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+                            <div class="flex items-center space-x-3">
+                                <span class="text-xs font-bold uppercase opacity-70">Class Filter:</span>
+                                <select id="feeClassFilter" class="px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none" onchange="renderStudentFeesTable()">
+                                    <option value="All">All Classes (1 to 5)</option>
+                                    <option value="Class 1">Class 1</option>
+                                    <option value="Class 2">Class 2</option>
+                                    <option value="Class 3">Class 3</option>
+                                    <option value="Class 4">Class 4</option>
+                                    <option value="Class 5">Class 5</option>
+                                </select>
+                            </div>
+                            <div class="text-xs opacity-70 font-bold">
+                                Total Collection Target: <span id="totalFeeTargetText" class="text-accent font-black">Rs 0</span>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-black/40 opacity-70 font-bold uppercase border-b border-slate-800/80">
+                                        <th class="py-3 px-4">Roll No</th>
+                                        <th class="py-3 px-4">Student Name</th>
+                                        <th class="py-3 px-4">Class</th>
+                                        <th class="py-3 px-4">Monthly Fee</th>
+                                        <th class="py-3 px-4">Payment Status</th>
+                                        <th class="py-3 px-4 text-center">Action / Receipt</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="studentFeesTableBody" class="divide-y divide-slate-800/60">
+                                    <!-- Dynamic Fee Records -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- SUB-VIEW 2: TEACHER SALARIES -->
+                    <div id="feesTeachersView" class="hidden theme-card p-6 rounded-2xl space-y-5">
+                        <div class="flex flex-col sm:flex-row sm:items-center justify-between gap-3 pb-4 border-b border-slate-800/80">
+                            <div>
+                                <h4 class="font-extrabold text-sm font-display">Faculty Salary Disbursements</h4>
+                                <p class="text-xs opacity-70">Process monthly payroll and issue pay slips.</p>
+                            </div>
+                            <div class="text-xs opacity-70 font-bold">
+                                Monthly Payroll Expense: <span id="totalPayrollText" class="text-accent font-black">Rs 0</span>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-black/40 opacity-70 font-bold uppercase border-b border-slate-800/80">
+                                        <th class="py-3 px-4">ID</th>
+                                        <th class="py-3 px-4">Teacher Name</th>
+                                        <th class="py-3 px-4">Designation</th>
+                                        <th class="py-3 px-4">Base Salary</th>
+                                        <th class="py-3 px-4">Disbursement Status</th>
+                                        <th class="py-3 px-4 text-center">Pay Slip Action</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="teacherSalariesTableBody" class="divide-y divide-slate-800/60">
+                                    <!-- Dynamic Salary Records -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 4: EXAMS SETUP -->
+                <div id="tab-exams" class="tab-content hidden space-y-6">
+                    <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+                        <div>
+                            <h3 class="text-xl font-black font-display">Exams & Assessment Setup</h3>
+                            <p class="text-xs opacity-70">Admins schedule exams. Teachers enter and edit student marks.</p>
+                        </div>
+                        <button id="btnCreateExam" onclick="openExamModal()" class="hidden px-4 py-2.5 btn-accent text-white font-bold text-xs rounded-xl shadow-lg">
+                            <i class="fa-solid fa-plus mr-1.5"></i> Schedule New Exam
+                        </button>
+                    </div>
+
+                    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5" id="examCardsGrid">
+                        <!-- Dynamic Exams Cards -->
+                    </div>
+                </div>
+
+                <!-- TAB 5: RESULTS & REPORT CARD -->
+                <div id="tab-results" class="tab-content hidden space-y-6">
+                    <div class="flex items-center justify-between">
+                        <div>
+                            <h3 class="text-xl font-black font-display">Academic Results & Report Cards</h3>
+                            <p class="text-xs opacity-70">View performance and generate printable official report cards.</p>
+                        </div>
+                    </div>
+
+                    <div id="resultsStudentSelector" class="theme-card p-4 rounded-2xl flex items-center space-x-3">
+                        <label class="text-xs font-bold uppercase opacity-80">Select Student:</label>
+                        <select id="resultStudentDropdown" class="px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" onchange="renderStudentResultCard(this.value)">
+                            <!-- Populated with 40 students -->
+                        </select>
+                    </div>
+
+                    <!-- Printable Report Card -->
+                    <div id="reportCardContainer" class="bg-white text-slate-900 p-8 rounded-3xl shadow-2xl max-w-3xl mx-auto space-y-6 border border-slate-300">
+                        <div class="text-center border-b-2 border-slate-900 pb-5">
+                            <h2 class="text-3xl font-black tracking-wider text-slate-900 uppercase font-display">APNA SCHOOL ZINDABAD</h2>
+                            <p class="text-xs font-bold text-emerald-700 uppercase tracking-widest mt-1">Official Student Academic Report Card</p>
+                        </div>
+
+                        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 bg-slate-100 p-4 rounded-2xl text-xs">
+                            <div>
+                                <span class="text-slate-500 uppercase font-bold block text-[10px]">Student Name</span>
+                                <strong id="rcName" class="text-slate-900 text-sm">--</strong>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 uppercase font-bold block text-[10px]">Roll Number</span>
+                                <strong id="rcRoll" class="text-slate-900 text-sm">--</strong>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 uppercase font-bold block text-[10px]">Class</span>
+                                <strong id="rcClass" class="text-slate-900 text-sm">--</strong>
+                            </div>
+                            <div>
+                                <span class="text-slate-500 uppercase font-bold block text-[10px]">Overall Grade</span>
+                                <strong id="rcGrade" class="text-emerald-700 text-sm font-black">--</strong>
+                            </div>
+                        </div>
+
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-left text-xs border border-slate-300">
+                                <thead>
+                                    <tr class="bg-slate-200 text-slate-800 font-bold uppercase border-b border-slate-300">
+                                        <th class="py-3 px-3">Subject</th>
+                                        <th class="py-3 px-3">Exam Date</th>
+                                        <th class="py-3 px-3 text-center">Max Marks</th>
+                                        <th class="py-3 px-3 text-center">Obtained Marks</th>
+                                        <th class="py-3 px-3 text-center">Percentage</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="rcMarksTable" class="divide-y divide-slate-300">
+                                    <!-- Dynamic Results -->
+                                </tbody>
+                            </table>
+                        </div>
+
+                        <div class="flex items-center justify-between pt-4 border-t border-slate-300">
+                            <p class="text-[11px] text-slate-500">Verified by Apna School Zindabad Portal</p>
+                            <button onclick="window.print()" class="no-print px-4 py-2.5 bg-slate-900 hover:bg-slate-800 text-white text-xs font-bold rounded-xl shadow">
+                                <i class="fa-solid fa-print mr-1.5"></i> Print Report Card
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 6: NOTICE BOARD & MESSAGES -->
+                <div id="tab-messages" class="tab-content hidden space-y-6">
+                    <div class="grid grid-cols-1 lg:grid-cols-3 gap-6">
+                        
+                        <!-- Admin Message Composer -->
+                        <div id="adminMessageComposer" class="hidden theme-card p-6 rounded-2xl space-y-4">
+                            <h3 class="font-extrabold text-base border-b border-slate-800/80 pb-3 font-display">
+                                <i class="fa-solid fa-paper-plane text-accent mr-2"></i> Broadcast Notice
+                            </h3>
+                            <form onsubmit="handleSendMessage(event)" class="space-y-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Target Audience</label>
+                                    <select id="msgTarget" class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current">
+                                        <option value="all">Everyone (Teachers & Students)</option>
+                                        <option value="teachers">Teachers Only</option>
+                                        <option value="students">Students Only</option>
+                                    </select>
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Notice Title</label>
+                                    <input type="text" id="msgTitle" required class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current" placeholder="e.g. Science Exhibition Announcement">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Message Content</label>
+                                    <textarea id="msgContent" rows="4" required class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current" placeholder="Write message details..."></textarea>
+                                </div>
+                                <button type="submit" class="w-full py-2.5 btn-accent font-bold text-xs rounded-xl shadow">
+                                    Broadcast Notice
+                                </button>
+                            </form>
+                        </div>
+
+                        <!-- Notice List -->
+                        <div id="messageBoardContainer" class="lg:col-span-2 space-y-4">
+                            <h3 class="font-extrabold text-base font-display">Announcements & Notices</h3>
+                            <div id="messagesList" class="space-y-3">
+                                <!-- Dynamic Messages -->
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+                <!-- TAB 7: USER DIRECTORY -->
+                <div id="tab-users" class="tab-content hidden space-y-6">
+                    <div class="theme-card p-6 rounded-2xl space-y-4">
+                        <div class="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 border-b border-slate-800/80 pb-4">
+                            <div>
+                                <h3 class="text-lg font-black font-display">User Directory</h3>
+                                <p class="text-xs opacity-70">Complete pre-loaded list of 40 Students, 10 Teachers, and 2 Admins.</p>
+                            </div>
+                            <select id="directoryRoleFilter" class="px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs font-semibold text-current focus:outline-none" onchange="renderDirectoryTable()">
+                                <option value="all">All Accounts</option>
+                                <option value="student">Students (40)</option>
+                                <option value="teacher">Teachers (10)</option>
+                                <option value="admin">Admins (2)</option>
+                            </select>
+                        </div>
+
+                        <div class="overflow-x-auto rounded-xl border border-slate-800/80">
+                            <table class="w-full text-left text-xs">
+                                <thead>
+                                    <tr class="bg-black/40 uppercase font-bold border-b border-slate-800/80 opacity-70">
+                                        <th class="py-3 px-3">Name</th>
+                                        <th class="py-3 px-3">Email Address</th>
+                                        <th class="py-3 px-3">Role</th>
+                                        <th class="py-3 px-3">Class / Details</th>
+                                        <th class="py-3 px-3">Password Pin</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="directoryTableBody" class="divide-y divide-slate-800/60">
+                                    <!-- Dynamic Users -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- TAB 8: PROFILE UPDATE SYSTEM -->
+                <div id="tab-profile" class="tab-content hidden space-y-6">
+                    <div class="theme-card p-6 md:p-8 rounded-3xl max-w-3xl mx-auto space-y-6">
+                        <div class="flex items-center space-x-4 border-b border-slate-800/80 pb-5">
+                            <div id="profileImagePreview" class="w-20 h-20 rounded-2xl badge-accent text-accent flex items-center justify-center font-black text-2xl border shadow-inner overflow-hidden">
+                                U
+                            </div>
+                            <div>
+                                <h3 class="text-xl font-extrabold font-display" id="profileHeaderName">User Profile Settings</h3>
+                                <p class="text-xs opacity-70">Update your account information, emergency contact, and profile avatar.</p>
+                            </div>
+                        </div>
+
+                        <form onsubmit="handleSaveProfile(event)" class="space-y-4">
+                            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Full Name</label>
+                                    <input type="text" id="profFullName" required class="w-full px-4 py-2.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Email Address (Read-only)</label>
+                                    <input type="email" id="profEmail" readonly class="w-full px-4 py-2.5 bg-black/20 border border-slate-800 rounded-xl text-xs text-current opacity-60 cursor-not-allowed">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Phone Number</label>
+                                    <input type="text" id="profPhone" class="w-full px-4 py-2.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="+92 300 1234567">
+                                </div>
+                                <div>
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Emergency Contact</label>
+                                    <input type="text" id="profEmergency" class="w-full px-4 py-2.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="Guardian / Relative Contact">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Profile Photo URL (Image Link)</label>
+                                    <input type="url" id="profAvatarUrl" class="w-full px-4 py-2.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="https://example.com/avatar.jpg" oninput="updateProfileAvatarPreview(this.value)">
+                                </div>
+                                <div class="md:col-span-2">
+                                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Residential Address</label>
+                                    <textarea id="profAddress" rows="2" class="w-full px-4 py-2.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="Street Address, City"></textarea>
+                                </div>
+                            </div>
+
+                            <div class="pt-3 flex justify-end space-x-3">
+                                <button type="button" onclick="switchTab('dashboard')" class="px-5 py-2.5 border border-slate-700 rounded-xl text-xs font-bold">Cancel</button>
+                                <button type="submit" class="px-5 py-2.5 btn-accent rounded-xl text-xs font-bold shadow-lg">Save Profile Changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+            </div>
+        </main>
+    </div>
+
+    <!-- MODAL: CREATE / EDIT EXAM -->
+    <div id="examModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="theme-modal w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4">
+            <div class="flex items-center justify-between border-b border-slate-800/80 pb-3">
+                <h3 class="font-extrabold text-sm font-display" id="examModalTitle">Schedule New Exam Paper</h3>
+                <button onclick="closeExamModal()" class="opacity-70 hover:opacity-100"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <form onsubmit="handleSaveExam(event)" class="space-y-3">
+                <input type="hidden" id="examEditId">
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Subject Name</label>
+                    <input type="text" id="examSubject" required class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current" placeholder="e.g. Mathematics">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Target Class</label>
+                    <select id="examClass" class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current">
+                        <option value="Class 1">Class 1</option>
+                        <option value="Class 2">Class 2</option>
+                        <option value="Class 3">Class 3</option>
+                        <option value="Class 4">Class 4</option>
+                        <option value="Class 5">Class 5</option>
+                    </select>
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Exam Date</label>
+                    <input type="date" id="examDate" required class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Total Maximum Marks</label>
+                    <input type="number" id="examTotalMarks" value="100" required class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase mb-1 opacity-80">Paper Instructions</label>
+                    <textarea id="examInstructions" rows="2" class="w-full px-3.5 py-2 bg-black/30 border border-slate-700 rounded-xl text-xs text-current" placeholder="Details..."></textarea>
+                </div>
+                <div class="pt-2 flex justify-end space-x-2">
+                    <button type="button" onclick="closeExamModal()" class="px-4 py-2 border border-slate-700 rounded-xl text-xs font-bold">Cancel</button>
+                    <button type="submit" class="px-4 py-2 btn-accent rounded-xl text-xs font-bold">Save Exam</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!-- MODAL: MARKS ENTRY (TEACHER) -->
+    <div id="marksModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="theme-modal w-full max-w-2xl rounded-2xl shadow-2xl overflow-hidden flex flex-col max-h-[90vh]">
+            <div class="p-4 bg-black/40 flex items-center justify-between border-b border-slate-800/80">
+                <div>
+                    <h3 id="marksModalExamTitle" class="font-extrabold text-sm font-display">Enter Student Marks</h3>
+                    <p id="marksModalExamSubtitle" class="text-[11px] text-accent">Class 1 - Mathematics</p>
+                </div>
+                <button onclick="closeMarksModal()" class="opacity-70 hover:opacity-100"><i class="fa-solid fa-xmark text-lg"></i></button>
+            </div>
+            <div class="p-4 overflow-y-auto flex-1">
+                <table class="w-full text-left text-xs border-collapse">
+                    <thead>
+                        <tr class="bg-black/40 uppercase font-bold border-b border-slate-800 opacity-70">
+                            <th class="py-2.5 px-3">Roll No</th>
+                            <th class="py-2.5 px-3">Student Name</th>
+                            <th class="py-2.5 px-3">Obtained Marks (Max: <span id="marksModalMax">100</span>)</th>
+                        </tr>
+                    </thead>
+                    <tbody id="marksModalTableBody" class="divide-y divide-slate-800/60">
+                        <!-- Student Rows -->
+                    </tbody>
+                </table>
+            </div>
+            <div class="p-4 border-t border-slate-800/80 bg-black/40 flex justify-end space-x-2">
+                <button onclick="closeMarksModal()" class="px-4 py-2 border border-slate-700 rounded-xl text-xs font-bold">Cancel</button>
+                <button onclick="saveMarksEntry()" class="px-4 py-2 btn-accent rounded-xl text-xs font-bold">Save & Submit Marks</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PRINTABLE DIGITAL FEE RECEIPT -->
+    <div id="receiptModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white text-slate-900 w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 border border-slate-300">
+            <div class="text-center border-b pb-3 border-slate-300">
+                <h3 class="text-xl font-black uppercase tracking-wider font-display text-slate-900">APNA SCHOOL ZINDABAD</h3>
+                <p class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Official Fee Payment Voucher</p>
+            </div>
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Receipt No:</span>
+                    <span id="rcpNumber" class="font-mono font-bold">REC-1092</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Student Name:</span>
+                    <span id="rcpStudentName" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Roll / Class:</span>
+                    <span id="rcpClassRoll" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Tuition Month:</span>
+                    <span id="rcpMonth" class="font-bold">Current Month</span>
+                </div>
+                <div class="flex justify-between border-t border-b py-2 my-2 border-slate-200">
+                    <span class="text-slate-700 font-black">Total Paid Amount:</span>
+                    <span id="rcpAmount" class="text-base font-black text-emerald-700">Rs 4,500</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Status:</span>
+                    <span id="rcpStatus" class="font-black text-emerald-600 uppercase">PAID</span>
+                </div>
+            </div>
+            <div class="pt-3 flex justify-end space-x-2 border-t border-slate-200 no-print">
+                <button onclick="closeReceiptModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-bold text-slate-700">Close</button>
+                <button onclick="window.print()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow">
+                    <i class="fa-solid fa-print mr-1"></i> Print Receipt
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODAL: PRINTABLE SALARY PAY SLIP -->
+    <div id="payslipModal" class="hidden fixed inset-0 z-50 bg-black/80 backdrop-blur-md flex items-center justify-center p-4">
+        <div class="bg-white text-slate-900 w-full max-w-md rounded-2xl shadow-2xl p-6 space-y-4 border border-slate-300">
+            <div class="text-center border-b pb-3 border-slate-300">
+                <h3 class="text-xl font-black uppercase tracking-wider font-display text-slate-900">APNA SCHOOL ZINDABAD</h3>
+                <p class="text-[10px] font-bold text-emerald-700 uppercase tracking-widest">Faculty Salary Disbursement Slip</p>
+            </div>
+            <div class="space-y-2 text-xs">
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Disbursement ID:</span>
+                    <span id="psNumber" class="font-mono font-bold">PAY-9823</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Teacher Name:</span>
+                    <span id="psTeacherName" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Designation:</span>
+                    <span id="psDesignation" class="font-bold">--</span>
+                </div>
+                <div class="flex justify-between border-t border-b py-2 my-2 border-slate-200">
+                    <span class="text-slate-700 font-black">Net Salary Paid:</span>
+                    <span id="psAmount" class="text-base font-black text-emerald-700">Rs 45,000</span>
+                </div>
+                <div class="flex justify-between">
+                    <span class="text-slate-500 font-bold">Status:</span>
+                    <span id="psStatus" class="font-black text-emerald-600 uppercase">DISBURSED</span>
+                </div>
+            </div>
+            <div class="pt-3 flex justify-end space-x-2 border-t border-slate-200 no-print">
+                <button onclick="closePayslipModal()" class="px-4 py-2 border border-slate-300 rounded-xl text-xs font-bold text-slate-700">Close</button>
+                <button onclick="window.print()" class="px-4 py-2 bg-slate-900 hover:bg-slate-800 text-white rounded-xl text-xs font-bold shadow">
+                    <i class="fa-solid fa-print mr-1"></i> Print Pay Slip
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentUser = null;
+        let activeCredTab = 'admin';
+        let activeFeesSubTab = 'students';
+
+        // THEME PRESET SWITCHER LOGIC Persistence
+        function setThemePreset(presetName) {
+            document.body.classList.remove('theme-cyber', 'theme-light', 'theme-crimson');
+            if (presetName === 'cyber') {
+                document.body.classList.add('theme-cyber');
+            } else if (presetName === 'light') {
+                document.body.classList.add('theme-light');
+            } else if (presetName === 'crimson') {
+                document.body.classList.add('theme-crimson');
+            }
+            localStorage.setItem('aps_theme_preset', presetName);
+        }
+
+        function loadSavedTheme() {
+            const savedTheme = localStorage.getItem('aps_theme_preset') || 'emerald';
+            setThemePreset(savedTheme);
+        }
+
+        // INITIALIZE SEED DATA (40 Students, 10 Teachers, 2 Admins, Fees, Salaries)
+        function initSeedData() {
+            if (!localStorage.getItem('aps_users')) {
+                const users = [];
+
+                // 2 Admins
+                users.push(
+                    { id: 'ADM01', name: 'Principal Ahmed', email: 'admin1@apnaschool.com', password: '2233', role: 'admin', phone: '+92 300 1112233', emergency: '+92 300 9998877', address: 'Main Campus Admin Wing, Sector H-8', avatar: '' },
+                    { id: 'ADM02', name: 'Vice Principal Sarah', email: 'admin2@apnaschool.com', password: '2233', role: 'admin', phone: '+92 300 2223344', emergency: '+92 300 8887766', address: 'Block B Staff Quarters', avatar: '' }
+                );
+
+                // 10 Teachers
+                const subjects = ['Mathematics', 'English', 'Science', 'Urdu', 'Islamiyat', 'Computer Science', 'Physics', 'Chemistry', 'Biology', 'Social Studies'];
+                const teacherNames = ['Sir Ali', 'Madam Fatima', 'Sir Usman', 'Madam Ayesha', 'Sir Bilal', 'Madam Zainab', 'Sir Tariq', 'Madam Hina', 'Sir Hamza', 'Madam Sana'];
+                
+                for (let i = 1; i <= 10; i++) {
+                    users.push({
+                        id: `TCH${i < 10 ? '0' + i : i}`,
+                        name: `${teacherNames[i - 1]} (${subjects[i - 1]})`,
+                        email: `teacher${i}@apnaschool.com`,
+                        password: '1122',
+                        role: 'teacher',
+                        designation: `Senior Lecturer - ${subjects[i - 1]}`,
+                        baseSalary: 45000 + (i * 2000),
+                        phone: `+92 321 55500${i}`,
+                        emergency: `+92 300 44400${i}`,
+                        address: `House #${i*3}, Teacher Colony, Islamabad`,
+                        avatar: ''
+                    });
+                }
+
+                // 40 Students (Assigned across Classes 1-5)
+                const studentFirstNames = ['Zaid', 'Hassan', 'Omar', 'Mustafa', 'Ibrahim', 'Yousuf', 'Hamza', 'Saad', 'Anas', 'Rayyan', 'Mariam', 'Zoya', 'Ayat', 'Eshal', 'Hooriya', 'Areeba', 'Laiba', 'Mahnoor', 'Bisma', 'Kinza'];
+                
+                for (let i = 1; i <= 40; i++) {
+                    const clsNum = ((i - 1) % 5) + 1;
+                    const fn = studentFirstNames[(i - 1) % studentFirstNames.length];
+                    users.push({
+                        id: `STD${i < 10 ? '0' + i : i}`,
+                        name: `${fn} Khan (${i})`,
+                        email: `student${i}@apnaschool.com`,
+                        password: '3344',
+                        role: 'student',
+                        class: `Class ${clsNum}`,
+                        rollNo: `10${i < 10 ? '0' + i : i}`,
+                        monthlyFee: 3500 + (clsNum * 300),
+                        phone: `+92 333 77700${i}`,
+                        emergency: `+92 312 88800${i}`,
+                        address: `Street #${clsNum}, Block ${i}, Rawalpindi`,
+                        avatar: ''
+                    });
+                }
+
+                localStorage.setItem('aps_users', JSON.stringify(users));
+            }
+
+            if (!localStorage.getItem('aps_messages')) {
+                const initialMessages = [
+                    {
+                        id: 'MSG1',
+                        sender: 'Principal Ahmed (Admin)',
+                        target: 'all',
+                        title: 'Welcome to Apna School Zindabad!',
+                        content: 'Welcome to our school portal. Fees, salary records, attendance tracking, and exam results are available now.',
+                        date: new Date().toLocaleDateString()
+                    }
+                ];
+                localStorage.setItem('aps_messages', JSON.stringify(initialMessages));
+            }
+
+            if (!localStorage.getItem('aps_attendance')) {
+                localStorage.setItem('aps_attendance', JSON.stringify([]));
+            }
+
+            if (!localStorage.getItem('aps_exams')) {
+                const initialExams = [
+                    {
+                        id: 'EX1',
+                        subject: 'Mathematics',
+                        class: 'Class 1',
+                        date: new Date(Date.now() + 86400000 * 2).toISOString().split('T')[0],
+                        totalMarks: 100,
+                        instructions: 'Mid-term evaluation covering Chapters 1 to 4.',
+                        marks: {}
+                    }
+                ];
+                localStorage.setItem('aps_exams', JSON.stringify(initialExams));
+            }
+
+            // FEES & SALARY SEED DATA PERSISTENCE
+            if (!localStorage.getItem('aps_fees')) {
+                const users = JSON.parse(localStorage.getItem('aps_users'));
+                const students = users.filter(u => u.role === 'student');
+                const feeRecords = students.map((s, idx) => ({
+                    studentId: s.id,
+                    amount: s.monthlyFee || 4000,
+                    status: idx % 2 === 0 ? 'Paid' : 'Unpaid',
+                    paidDate: idx % 2 === 0 ? new Date().toLocaleDateString() : '--',
+                    receiptNo: idx % 2 === 0 ? `REC-${1000 + idx}` : '--'
+                }));
+                localStorage.setItem('aps_fees', JSON.stringify(feeRecords));
+            }
+
+            if (!localStorage.getItem('aps_salaries')) {
+                const users = JSON.parse(localStorage.getItem('aps_users'));
+                const teachers = users.filter(u => u.role === 'teacher');
+                const salaryRecords = teachers.map((t, idx) => ({
+                    teacherId: t.id,
+                    amount: t.baseSalary || 45000,
+                    status: idx % 3 === 0 ? 'Pending' : 'Disbursed',
+                    disbursedDate: idx % 3 === 0 ? '--' : new Date().toLocaleDateString(),
+                    payslipNo: idx % 3 === 0 ? '--' : `PAY-${2000 + idx}`
+                }));
+                localStorage.setItem('aps_salaries', JSON.stringify(salaryRecords));
+            }
+        }
+
+        function getUsers() { return JSON.parse(localStorage.getItem('aps_users') || '[]'); }
+        function getMessages() { return JSON.parse(localStorage.getItem('aps_messages') || '[]'); }
+        function getAttendance() { return JSON.parse(localStorage.getItem('aps_attendance') || '[]'); }
+        function getExams() { return JSON.parse(localStorage.getItem('aps_exams') || '[]'); }
+        function getFees() { return JSON.parse(localStorage.getItem('aps_fees') || '[]'); }
+        function getSalaries() { return JSON.parse(localStorage.getItem('aps_salaries') || '[]'); }
+
+        // LOGIN CREDENTIALS DIRECTORY
+        function renderCredentialTabs() {
+            const roleTabs = ['admin', 'teacher', 'student'];
+            const container = document.getElementById('credRoleTabs');
+
+            container.innerHTML = roleTabs.map(r => `
+                <button onclick="setCredTab('${r}')" class="px-3 py-1 rounded-lg text-xs font-bold uppercase transition-all ${activeCredTab === r ? 'btn-accent' : 'bg-black/30 opacity-70 hover:opacity-100'}">
+                    ${r}s
+                </button>
+            `).join('');
+
+            renderCredentialAccounts();
+        }
+
+        function setCredTab(role) {
+            activeCredTab = role;
+            document.getElementById('loginRole').value = role;
+            renderCredentialTabs();
+        }
+
+        function renderCredentialAccounts() {
+            const users = getUsers().filter(u => u.role === activeCredTab);
+            const grid = document.getElementById('credentialAccountsGrid');
+
+            grid.innerHTML = users.map(u => `
+                <div class="bg-black/30 border border-slate-800 p-2.5 rounded-xl flex items-center justify-between text-xs">
+                    <div class="overflow-hidden mr-2">
+                        <p class="font-bold truncate">${u.name}</p>
+                        <p class="text-[10px] opacity-70 truncate">${u.email} | Pass: <span class="font-mono text-accent">${u.password}</span></p>
+                    </div>
+                    <button onclick="autofillAndLogin('${u.email}', '${u.password}', '${u.role}')" class="px-2.5 py-1 badge-accent rounded-lg text-[10px] font-bold whitespace-nowrap">
+                        Autofill
+                    </button>
+                </div>
+            `).join('');
+        }
+
+        function autofillAndLogin(email, pass, role) {
+            document.getElementById('loginRole').value = role;
+            document.getElementById('loginEmail').value = email;
+            document.getElementById('loginPassword').value = pass;
+            document.getElementById('loginForm').dispatchEvent(new Event('submit'));
+        }
+
+        function handleLogin(e) {
+            e.preventDefault();
+            const email = document.getElementById('loginEmail').value.trim();
+            const password = document.getElementById('loginPassword').value.trim();
+            const role = document.getElementById('loginRole').value;
+
+            const users = getUsers();
+            const foundUser = users.find(u => u.email.toLowerCase() === email.toLowerCase() && u.password === password && u.role === role);
+
+            const alertBox = document.getElementById('loginAlert');
+            if (foundUser) {
+                currentUser = foundUser;
+                localStorage.setItem('aps_current_user', JSON.stringify(foundUser));
+                alertBox.className = "p-3 rounded-xl text-xs font-bold bg-emerald-950 text-emerald-400 border border-emerald-800 mb-2";
+                alertBox.innerText = "Login Successful! Redirecting...";
+                alertBox.classList.remove('hidden');
+
+                setTimeout(() => {
+                    document.getElementById('loginSection').classList.add('hidden');
+                    document.getElementById('appSection').classList.remove('hidden');
+                    setupUserUI();
+                }, 300);
+            } else {
+                alertBox.className = "p-3 rounded-xl text-xs font-bold bg-rose-950 text-rose-400 border border-rose-800 mb-2";
+                alertBox.innerText = "Invalid Email or Password for selected role.";
+                alertBox.classList.remove('hidden');
+            }
+        }
+
+        function handleLogout() {
+            currentUser = null;
+            localStorage.removeItem('aps_current_user');
+            document.getElementById('appSection').classList.add('hidden');
+            document.getElementById('loginSection').classList.remove('hidden');
+        }
+
+        // USER UI NAVIGATION
+        function setupUserUI() {
+            if (!currentUser) return;
+
+            document.getElementById('currentDateText').innerText = new Date().toLocaleDateString('en-US', { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' });
+            document.getElementById('userNameDisplay').innerText = currentUser.name;
+            document.getElementById('userEmailDisplay').innerText = currentUser.email;
+            document.getElementById('userRoleBadge').innerText = currentUser.role.toUpperCase();
+
+            // Avatar rendering
+            const avatarBox = document.getElementById('userAvatar');
+            if (currentUser.avatar) {
+                avatarBox.innerHTML = `<img src="${currentUser.avatar}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/10b981/ffffff?text=${currentUser.name.charAt(0)}'">`;
+            } else {
+                avatarBox.innerText = currentUser.name.charAt(0);
+            }
+
+            const sideNav = document.getElementById('sideNav');
+            let navItems = [
+                { id: 'dashboard', label: 'Dashboard', icon: 'fa-chart-pie' },
+                { id: 'attendance', label: 'Attendance', icon: 'fa-calendar-check' },
+                { id: 'fees', label: currentUser.role === 'student' ? 'My Fee Voucher' : currentUser.role === 'teacher' ? 'Salary & Payroll' : 'Fees & Salaries', icon: 'fa-wallet' },
+                { id: 'exams', label: 'Exams & Setup', icon: 'fa-file-signature' },
+                { id: 'results', label: 'Result Card', icon: 'fa-award' },
+                { id: 'messages', label: 'Notice Board', icon: 'fa-bullhorn' },
+                { id: 'profile', label: 'My Profile', icon: 'fa-user-gear' }
+            ];
+
+            if (currentUser.role === 'admin') {
+                navItems.push({ id: 'users', label: 'User Directory', icon: 'fa-users-gear' });
+            }
+
+            sideNav.innerHTML = navItems.map(item => `
+                <button onclick="switchTab('${item.id}')" id="nav-btn-${item.id}" class="w-full flex items-center space-x-3 px-3.5 py-3 rounded-xl text-xs font-bold opacity-70 hover:opacity-100 hover:bg-black/20 transition-all">
+                    <i class="fa-solid ${item.icon} w-5 text-center text-accent"></i>
+                    <span>${item.label}</span>
+                </button>
+            `).join('');
+
+            document.getElementById('dashWelcomeTitle').innerText = `Welcome Back, ${currentUser.name}!`;
+
+            const qBtnContainer = document.getElementById('dashQuickButtons');
+            if (currentUser.role === 'admin') {
+                qBtnContainer.innerHTML = `
+                    <button onclick="switchTab('attendance')" class="px-4 py-2.5 btn-accent rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-calendar-check mr-1.5"></i> Mark Attendance</button>
+                    <button onclick="switchTab('fees')" class="px-4 py-2.5 theme-card rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-coins mr-1.5"></i> Manage Fees/Salaries</button>
+                    <button onclick="switchTab('exams'); openExamModal()" class="px-4 py-2.5 theme-card rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-plus mr-1.5"></i> Create Exam</button>
+                `;
+            } else if (currentUser.role === 'teacher') {
+                qBtnContainer.innerHTML = `
+                    <button onclick="switchTab('exams')" class="px-4 py-2.5 btn-accent rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-file-pen mr-1.5"></i> Grade Student Papers</button>
+                    <button onclick="switchTab('fees')" class="px-4 py-2.5 theme-card rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-receipt mr-1.5"></i> View Pay Slip</button>
+                `;
+            } else {
+                qBtnContainer.innerHTML = `
+                    <button onclick="switchTab('results')" class="px-4 py-2.5 btn-accent rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-award mr-1.5"></i> View Result Card</button>
+                    <button onclick="switchTab('fees')" class="px-4 py-2.5 theme-card rounded-xl text-xs font-bold shadow"><i class="fa-solid fa-file-invoice-dollar mr-1.5"></i> Fee Receipt</button>
+                `;
+            }
+
+            if (currentUser.role === 'admin') {
+                document.getElementById('adminAttendanceControls').classList.remove('hidden');
+                document.getElementById('personalAttendanceView').classList.add('hidden');
+                document.getElementById('btnCreateExam').classList.remove('hidden');
+                document.getElementById('adminMessageComposer').classList.remove('hidden');
+                document.getElementById('resultsStudentSelector').classList.remove('hidden');
+            } else {
+                document.getElementById('adminAttendanceControls').classList.add('hidden');
+                document.getElementById('personalAttendanceView').classList.remove('hidden');
+                document.getElementById('btnCreateExam').classList.add('hidden');
+                document.getElementById('adminMessageComposer').classList.add('hidden');
+            }
+
+            if (currentUser.role === 'teacher') {
+                document.getElementById('resultsStudentSelector').classList.remove('hidden');
+            } else if (currentUser.role === 'student') {
+                document.getElementById('resultsStudentSelector').classList.add('hidden');
+            }
+
+            updateDashboardStats();
+            switchTab('dashboard');
+        }
+
+        function switchTab(tabId) {
+            document.querySelectorAll('.tab-content').forEach(el => el.classList.add('hidden'));
+            document.querySelectorAll('#sideNav button').forEach(el => {
+                el.classList.remove('btn-accent');
+                el.classList.add('opacity-70');
+            });
+
+            const targetTab = document.getElementById(`tab-${tabId}`);
+            if (targetTab) targetTab.classList.remove('hidden');
+
+            const navBtn = document.getElementById(`nav-btn-${tabId}`);
+            if (navBtn) {
+                navBtn.classList.add('btn-accent');
+                navBtn.classList.remove('opacity-70');
+            }
+
+            const titleMap = {
+                'dashboard': 'Dashboard Overview',
+                'attendance': 'Attendance Management',
+                'fees': 'Fees & Salary Management System',
+                'exams': 'Exam & Assessment Setup',
+                'results': 'Student Academic Results',
+                'messages': 'Notice Board & Notifications',
+                'users': 'School User Directory',
+                'profile': 'My Profile Settings'
+            };
+            document.getElementById('pageTitle').innerText = titleMap[tabId] || 'Portal';
+
+            if (tabId === 'attendance') {
+                document.getElementById('attendanceDatePicker').value = new Date().toISOString().split('T')[0];
+                loadAttendanceList();
+                renderPersonalAttendanceLog();
+            } else if (tabId === 'fees') {
+                setupFeesModuleView();
+            } else if (tabId === 'exams') {
+                renderExams();
+            } else if (tabId === 'results') {
+                populateResultStudentDropdown();
+            } else if (tabId === 'messages') {
+                renderMessages();
+            } else if (tabId === 'users') {
+                renderDirectoryTable();
+            } else if (tabId === 'profile') {
+                loadProfileForm();
+            }
+        }
+
+        // STATS COMPUTATION
+        function updateDashboardStats() {
+            const users = getUsers();
+            const students = users.filter(u => u.role === 'student');
+            const teachers = users.filter(u => u.role === 'teacher');
+            const exams = getExams();
+            const messages = getMessages();
+            const fees = getFees();
+
+            document.getElementById('statStudents').innerText = students.length;
+            document.getElementById('statTeachers').innerText = teachers.length;
+            document.getElementById('statExams').innerText = exams.length;
+
+            const paidFeesSum = fees.filter(f => f.status === 'Paid').reduce((sum, f) => sum + f.amount, 0);
+            document.getElementById('statFinance').innerText = `Rs ${paidFeesSum.toLocaleString()}`;
+
+            if (currentUser && currentUser.role !== 'admin') {
+                document.getElementById('dashPersonalAttendanceCard').classList.remove('hidden');
+                const attendance = getAttendance();
+                const myLogs = attendance.filter(a => a.userId === currentUser.id);
+
+                const presentCount = myLogs.filter(a => a.status === 'Present').length;
+                const absentCount = myLogs.filter(a => a.status === 'Absent').length;
+                const total = myLogs.length;
+                const rate = total > 0 ? Math.round((presentCount / total) * 100) : 100;
+
+                document.getElementById('personalPresentCount').innerText = presentCount;
+                document.getElementById('personalAbsentCount').innerText = absentCount;
+                document.getElementById('personalRatePct').innerText = `${rate}%`;
+            }
+        }
+
+        // ATTENDANCE LOGIC
+        function loadAttendanceList() {
+            if (currentUser.role !== 'admin') return;
+
+            const date = document.getElementById('attendanceDatePicker').value;
+            const targetType = document.getElementById('attendanceTargetType').value;
+            const classFilter = document.getElementById('attendanceClassFilter').value;
+
+            const filterWrapper = document.getElementById('classFilterWrapper');
+            if (targetType === 'students') {
+                filterWrapper.classList.remove('hidden');
+            } else {
+                filterWrapper.classList.add('hidden');
+            }
+
+            let list = getUsers().filter(u => u.role === (targetType === 'students' ? 'student' : 'teacher'));
+            if (targetType === 'students' && classFilter !== 'All') {
+                list = list.filter(s => s.class === classFilter);
+            }
+
+            const allAttendance = getAttendance();
+            const tbody = document.getElementById('attendanceMarkTable');
+
+            tbody.innerHTML = list.map(item => {
+                const record = allAttendance.find(a => a.date === date && a.userId === item.id);
+                const currentStatus = record ? record.status : 'Present';
+
+                return `
+                    <tr class="hover:bg-black/10">
+                        <td class="py-3.5 px-4 font-bold">${item.rollNo || item.id}</td>
+                        <td class="py-3.5 px-4">${item.name}</td>
+                        <td class="py-3.5 px-4 text-xs opacity-70">${item.class || 'Faculty Member'}</td>
+                        <td class="py-3.5 px-4 text-center">
+                            <div class="inline-flex rounded-xl shadow-sm p-0.5 border border-slate-700 bg-black/30" role="group">
+                                <button onclick="markSingleAttendance('${item.id}', '${date}', 'Present')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${currentStatus === 'Present' ? 'bg-emerald-600 text-white shadow' : 'opacity-60 hover:opacity-100'}">
+                                    <i class="fa-solid fa-check mr-1"></i> Present
+                                </button>
+                                <button onclick="markSingleAttendance('${item.id}', '${date}', 'Absent')" class="px-3 py-1.5 text-xs font-bold rounded-lg transition-all ${currentStatus === 'Absent' ? 'bg-rose-600 text-white shadow' : 'opacity-60 hover:opacity-100'}">
+                                    <i class="fa-solid fa-xmark mr-1"></i> Absent
+                                </button>
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+        }
+
+        function markSingleAttendance(userId, date, status) {
+            let attendance = getAttendance();
+            const existingIdx = attendance.findIndex(a => a.date === date && a.userId === userId);
+
+            if (existingIdx > -1) {
+                attendance[existingIdx].status = status;
+                attendance[existingIdx].markedBy = currentUser.name;
+            } else {
+                attendance.push({
+                    id: 'ATT_' + Date.now() + Math.random().toString(36).substr(2, 4),
+                    userId: userId,
+                    date: date,
+                    status: status,
+                    markedBy: currentUser.name
+                });
+            }
+
+            localStorage.setItem('aps_attendance', JSON.stringify(attendance));
+            loadAttendanceList();
+        }
+
+        function markAllAttendance(status) {
+            const date = document.getElementById('attendanceDatePicker').value;
+            const targetType = document.getElementById('attendanceTargetType').value;
+            const classFilter = document.getElementById('attendanceClassFilter').value;
+
+            let list = getUsers().filter(u => u.role === (targetType === 'students' ? 'student' : 'teacher'));
+            if (targetType === 'students' && classFilter !== 'All') {
+                list = list.filter(s => s.class === classFilter);
+            }
+
+            list.forEach(item => {
+                markSingleAttendance(item.id, date, status);
+            });
+        }
+
+        function renderPersonalAttendanceLog() {
+            if (currentUser.role === 'admin') return;
+
+            document.getElementById('personalRoleTag').innerText = currentUser.role.toUpperCase();
+            const attendance = getAttendance().filter(a => a.userId === currentUser.id);
+            const tbody = document.getElementById('personalAttendanceLogTable');
+
+            if (attendance.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="4" class="text-center py-6 opacity-60">No attendance logged yet.</td></tr>`;
+                return;
+            }
+
+            tbody.innerHTML = attendance.sort((a,b) => new Date(b.date) - new Date(a.date)).map(log => `
+                <tr class="hover:bg-black/10">
+                    <td class="py-3 px-4 font-bold">${log.date}</td>
+                    <td class="py-3 px-4 text-xs opacity-70">${new Date(log.date).toLocaleDateString('en-US', { weekday: 'long' })}</td>
+                    <td class="py-3 px-4">
+                        <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase ${log.status === 'Present' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
+                            ${log.status}
+                        </span>
+                    </td>
+                    <td class="py-3 px-4 text-xs opacity-70">${log.markedBy || 'Admin'}</td>
+                </tr>
+            `).join('');
+        }
+
+        // FEES & SALARY SYSTEM LOGIC
+        function setupFeesModuleView() {
+            const subTabNav = document.getElementById('feesModuleSubTabs');
+
+            if (currentUser.role === 'student') {
+                subTabNav.classList.add('hidden');
+                switchFeesSubTab('students');
+            } else if (currentUser.role === 'teacher') {
+                subTabNav.classList.add('hidden');
+                switchFeesSubTab('teachers');
+            } else {
+                subTabNav.classList.remove('hidden');
+                switchFeesSubTab(activeFeesSubTab);
+            }
+        }
+
+        function switchFeesSubTab(type) {
+            activeFeesSubTab = type;
+            const btnStudents = document.getElementById('btnFeesStudentsTab');
+            const btnTeachers = document.getElementById('btnFeesTeachersTab');
+            const viewStudents = document.getElementById('feesStudentsView');
+            const viewTeachers = document.getElementById('feesTeachersView');
+
+            if (type === 'students') {
+                btnStudents.className = "px-3.5 py-2 btn-accent rounded-xl text-xs font-bold shadow";
+                btnTeachers.className = "px-3.5 py-2 theme-card rounded-xl text-xs font-bold opacity-70 hover:opacity-100";
+                viewStudents.classList.remove('hidden');
+                viewTeachers.classList.add('hidden');
+                renderStudentFeesTable();
+            } else {
+                btnTeachers.className = "px-3.5 py-2 btn-accent rounded-xl text-xs font-bold shadow";
+                btnStudents.className = "px-3.5 py-2 theme-card rounded-xl text-xs font-bold opacity-70 hover:opacity-100";
+                viewTeachers.classList.remove('hidden');
+                viewStudents.classList.add('hidden');
+                renderTeacherSalariesTable();
+            }
+        }
+
+        function renderStudentFeesTable() {
+            const users = getUsers();
+            let students = users.filter(u => u.role === 'student');
+            const fees = getFees();
+
+            if (currentUser.role === 'student') {
+                students = students.filter(s => s.id === currentUser.id);
+                document.getElementById('adminFeesHeader').classList.add('hidden');
+            } else {
+                document.getElementById('adminFeesHeader').classList.remove('hidden');
+                const classFilter = document.getElementById('feeClassFilter').value;
+                if (classFilter !== 'All') {
+                    students = students.filter(s => s.class === classFilter);
+                }
+            }
+
+            let totalTarget = 0;
+            const tbody = document.getElementById('studentFeesTableBody');
+
+            tbody.innerHTML = students.map(st => {
+                const feeRec = fees.find(f => f.studentId === st.id) || { amount: st.monthlyFee || 4000, status: 'Unpaid', paidDate: '--', receiptNo: '--' };
+                totalTarget += feeRec.amount;
+
+                return `
+                    <tr class="hover:bg-black/10">
+                        <td class="py-3 px-4 font-bold">${st.rollNo}</td>
+                        <td class="py-3 px-4 font-semibold">${st.name}</td>
+                        <td class="py-3 px-4 opacity-70">${st.class}</td>
+                        <td class="py-3 px-4 font-bold text-emerald-400">Rs ${feeRec.amount.toLocaleString()}</td>
+                        <td class="py-3 px-4">
+                            <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase ${feeRec.status === 'Paid' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-rose-950 text-rose-400 border border-rose-800'}">
+                                ${feeRec.status}
+                            </span>
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex items-center justify-center space-x-2">
+                                ${currentUser.role === 'admin' ? `
+                                    <button onclick="toggleFeePaymentStatus('${st.id}')" class="px-3 py-1.5 rounded-lg text-[11px] font-bold ${feeRec.status === 'Paid' ? 'bg-rose-950 text-rose-400 border border-rose-800' : 'btn-accent'}">
+                                        ${feeRec.status === 'Paid' ? 'Mark Unpaid' : 'Collect Fee'}
+                                    </button>
+                                ` : ''}
+                                ${feeRec.status === 'Paid' ? `
+                                    <button onclick="openReceiptModal('${st.id}')" class="px-3 py-1.5 theme-card rounded-lg text-[11px] font-bold text-accent">
+                                        <i class="fa-solid fa-receipt mr-1"></i> Voucher
+                                    </button>
+                                ` : '<span class="text-[11px] opacity-40">No Receipt</span>'}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('totalFeeTargetText').innerText = `Rs ${totalTarget.toLocaleString()}`;
+        }
+
+        function toggleFeePaymentStatus(studentId) {
+            let fees = getFees();
+            const idx = fees.findIndex(f => f.studentId === studentId);
+            const student = getUsers().find(u => u.id === studentId);
+
+            if (idx > -1) {
+                if (fees[idx].status === 'Paid') {
+                    fees[idx].status = 'Unpaid';
+                    fees[idx].paidDate = '--';
+                    fees[idx].receiptNo = '--';
+                } else {
+                    fees[idx].status = 'Paid';
+                    fees[idx].paidDate = new Date().toLocaleDateString();
+                    fees[idx].receiptNo = `REC-${Math.floor(1000 + Math.random() * 9000)}`;
+                }
+            } else {
+                fees.push({
+                    studentId: studentId,
+                    amount: student.monthlyFee || 4000,
+                    status: 'Paid',
+                    paidDate: new Date().toLocaleDateString(),
+                    receiptNo: `REC-${Math.floor(1000 + Math.random() * 9000)}`
+                });
+            }
+
+            localStorage.setItem('aps_fees', JSON.stringify(fees));
+            renderStudentFeesTable();
+            updateDashboardStats();
+        }
+
+        function openReceiptModal(studentId) {
+            const student = getUsers().find(u => u.id === studentId);
+            const feeRec = getFees().find(f => f.studentId === studentId);
+            if (!student || !feeRec) return;
+
+            document.getElementById('rcpNumber').innerText = feeRec.receiptNo;
+            document.getElementById('rcpStudentName').innerText = student.name;
+            document.getElementById('rcpClassRoll').innerText = `${student.class} (Roll: ${student.rollNo})`;
+            document.getElementById('rcpAmount').innerText = `Rs ${feeRec.amount.toLocaleString()}`;
+            document.getElementById('rcpStatus').innerText = feeRec.status;
+
+            document.getElementById('receiptModal').classList.remove('hidden');
+        }
+
+        function closeReceiptModal() {
+            document.getElementById('receiptModal').classList.add('hidden');
+        }
+
+        function renderTeacherSalariesTable() {
+            const users = getUsers();
+            let teachers = users.filter(u => u.role === 'teacher');
+            const salaries = getSalaries();
+
+            if (currentUser.role === 'teacher') {
+                teachers = teachers.filter(t => t.id === currentUser.id);
+            }
+
+            let totalPayroll = 0;
+            const tbody = document.getElementById('teacherSalariesTableBody');
+
+            tbody.innerHTML = teachers.map(t => {
+                const salRec = salaries.find(s => s.teacherId === t.id) || { amount: t.baseSalary || 45000, status: 'Pending', disbursedDate: '--', payslipNo: '--' };
+                totalPayroll += salRec.amount;
+
+                return `
+                    <tr class="hover:bg-black/10">
+                        <td class="py-3 px-4 font-bold">${t.id}</td>
+                        <td class="py-3 px-4 font-semibold">${t.name}</td>
+                        <td class="py-3 px-4 opacity-70">${t.designation || 'Faculty Member'}</td>
+                        <td class="py-3 px-4 font-bold text-emerald-400">Rs ${salRec.amount.toLocaleString()}</td>
+                        <td class="py-3 px-4">
+                            <span class="px-2.5 py-1 rounded-lg text-[10px] font-black uppercase ${salRec.status === 'Disbursed' ? 'bg-emerald-950 text-emerald-400 border border-emerald-800' : 'bg-amber-950 text-amber-400 border border-amber-800'}">
+                                ${salRec.status}
+                            </span>
+                        </td>
+                        <td class="py-3 px-4 text-center">
+                            <div class="flex items-center justify-center space-x-2">
+                                ${currentUser.role === 'admin' ? `
+                                    <button onclick="toggleSalaryDisbursement('${t.id}')" class="px-3 py-1.5 rounded-lg text-[11px] font-bold ${salRec.status === 'Disbursed' ? 'bg-amber-950 text-amber-400 border border-amber-800' : 'btn-accent'}">
+                                        ${salRec.status === 'Disbursed' ? 'Mark Pending' : 'Disburse Salary'}
+                                    </button>
+                                ` : ''}
+                                ${salRec.status === 'Disbursed' ? `
+                                    <button onclick="openPayslipModal('${t.id}')" class="px-3 py-1.5 theme-card rounded-lg text-[11px] font-bold text-accent">
+                                        <i class="fa-solid fa-file-invoice mr-1"></i> Pay Slip
+                                    </button>
+                                ` : '<span class="text-[11px] opacity-40">Pending</span>'}
+                            </div>
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('totalPayrollText').innerText = `Rs ${totalPayroll.toLocaleString()}`;
+        }
+
+        function toggleSalaryDisbursement(teacherId) {
+            let salaries = getSalaries();
+            const idx = salaries.findIndex(s => s.teacherId === teacherId);
+            const teacher = getUsers().find(u => u.id === teacherId);
+
+            if (idx > -1) {
+                if (salaries[idx].status === 'Disbursed') {
+                    salaries[idx].status = 'Pending';
+                    salaries[idx].disbursedDate = '--';
+                    salaries[idx].payslipNo = '--';
+                } else {
+                    salaries[idx].status = 'Disbursed';
+                    salaries[idx].disbursedDate = new Date().toLocaleDateString();
+                    salaries[idx].payslipNo = `PAY-${Math.floor(2000 + Math.random() * 8000)}`;
+                }
+            } else {
+                salaries.push({
+                    teacherId: teacherId,
+                    amount: teacher.baseSalary || 45000,
+                    status: 'Disbursed',
+                    disbursedDate: new Date().toLocaleDateString(),
+                    payslipNo: `PAY-${Math.floor(2000 + Math.random() * 8000)}`
+                });
+            }
+
+            localStorage.setItem('aps_salaries', JSON.stringify(salaries));
+            renderTeacherSalariesTable();
+        }
+
+        function openPayslipModal(teacherId) {
+            const teacher = getUsers().find(u => u.id === teacherId);
+            const salRec = getSalaries().find(s => s.teacherId === teacherId);
+            if (!teacher || !salRec) return;
+
+            document.getElementById('psNumber').innerText = salRec.payslipNo;
+            document.getElementById('psTeacherName').innerText = teacher.name;
+            document.getElementById('psDesignation').innerText = teacher.designation || 'Faculty Member';
+            document.getElementById('psAmount').innerText = `Rs ${salRec.amount.toLocaleString()}`;
+            document.getElementById('psStatus').innerText = salRec.status;
+
+            document.getElementById('payslipModal').classList.remove('hidden');
+        }
+
+        function closePayslipModal() {
+            document.getElementById('payslipModal').classList.add('hidden');
+        }
+
+        // EXAMS & MARKS
+        function renderExams() {
+            const exams = getExams();
+            const grid = document.getElementById('examCardsGrid');
+
+            if (exams.length === 0) {
+                grid.innerHTML = `<div class="col-span-full text-center py-8 opacity-60">No exams scheduled yet.</div>`;
+                return;
+            }
+
+            grid.innerHTML = exams.map(exam => `
+                <div class="theme-card p-5 rounded-2xl flex flex-col justify-between space-y-4">
+                    <div>
+                        <div class="flex items-center justify-between">
+                            <span class="px-2.5 py-1 badge-accent text-[10px] font-bold rounded-full uppercase">${exam.class}</span>
+                            <span class="text-xs opacity-70"><i class="fa-regular fa-calendar mr-1 text-accent"></i>${exam.date}</span>
+                        </div>
+                        <h4 class="text-lg font-extrabold mt-3 font-display">${exam.subject}</h4>
+                        <p class="text-xs opacity-70 mt-1 line-clamp-2">${exam.instructions || 'Standard assessment paper.'}</p>
+                        <p class="text-xs font-bold mt-2">Max Marks: ${exam.totalMarks}</p>
+                    </div>
+
+                    <div class="pt-3 border-t border-slate-800/80 flex items-center justify-between">
+                        ${currentUser.role === 'admin' ? `
+                            <button onclick="openExamModal('${exam.id}')" class="text-xs font-bold text-accent hover:underline"><i class="fa-solid fa-pen mr-1"></i> Edit Exam</button>
+                            <button onclick="deleteExam('${exam.id}')" class="text-xs font-bold text-rose-400 hover:underline"><i class="fa-solid fa-trash mr-1"></i> Delete</button>
+                        ` : ''}
+
+                        ${currentUser.role === 'teacher' ? `
+                            <button onclick="openMarksModal('${exam.id}')" class="w-full py-2 btn-accent rounded-xl text-xs font-bold shadow">
+                                <i class="fa-solid fa-graduation-cap mr-1"></i> Enter / Edit Marks
+                            </button>
+                        ` : ''}
+
+                        ${currentUser.role === 'student' ? `
+                            <span class="text-xs text-emerald-400 font-bold"><i class="fa-solid fa-circle-check mr-1"></i> Scheduled Paper</span>
+                        ` : ''}
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function openExamModal(examId = null) {
+            document.getElementById('examModal').classList.remove('hidden');
+            if (examId) {
+                const exam = getExams().find(e => e.id === examId);
+                document.getElementById('examModalTitle').innerText = 'Edit Scheduled Exam';
+                document.getElementById('examEditId').value = exam.id;
+                document.getElementById('examSubject').value = exam.subject;
+                document.getElementById('examClass').value = exam.class;
+                document.getElementById('examDate').value = exam.date;
+                document.getElementById('examTotalMarks').value = exam.totalMarks;
+                document.getElementById('examInstructions').value = exam.instructions;
+            } else {
+                document.getElementById('examModalTitle').innerText = 'Schedule New Exam Paper';
+                document.getElementById('examEditId').value = '';
+                document.getElementById('examSubject').value = '';
+                document.getElementById('examDate').value = new Date().toISOString().split('T')[0];
+                document.getElementById('examInstructions').value = '';
+            }
+        }
+
+        function closeExamModal() {
+            document.getElementById('examModal').classList.add('hidden');
+        }
+
+        function handleSaveExam(e) {
+            e.preventDefault();
+            let exams = getExams();
+            const editId = document.getElementById('examEditId').value;
+
+            const examData = {
+                id: editId || 'EX_' + Date.now(),
+                subject: document.getElementById('examSubject').value,
+                class: document.getElementById('examClass').value,
+                date: document.getElementById('examDate').value,
+                totalMarks: parseInt(document.getElementById('examTotalMarks').value),
+                instructions: document.getElementById('examInstructions').value,
+                marks: editId ? (exams.find(e => e.id === editId)?.marks || {}) : {}
+            };
+
+            if (editId) {
+                const idx = exams.findIndex(e => e.id === editId);
+                exams[idx] = examData;
+            } else {
+                exams.push(examData);
+            }
+
+            localStorage.setItem('aps_exams', JSON.stringify(exams));
+            closeExamModal();
+            renderExams();
+            updateDashboardStats();
+        }
+
+        function deleteExam(examId) {
+            let exams = getExams().filter(e => e.id !== examId);
+            localStorage.setItem('aps_exams', JSON.stringify(exams));
+            renderExams();
+            updateDashboardStats();
+        }
+
+        let activeMarksExamId = null;
+
+        function openMarksModal(examId) {
+            activeMarksExamId = examId;
+            const exam = getExams().find(e => e.id === examId);
+            const students = getUsers().filter(u => u.role === 'student' && u.class === exam.class);
+
+            document.getElementById('marksModalExamTitle').innerText = `Enter Student Marks: ${exam.subject}`;
+            document.getElementById('marksModalExamSubtitle').innerText = `${exam.class} - Max Marks: ${exam.totalMarks}`;
+            document.getElementById('marksModalMax').innerText = exam.totalMarks;
+
+            const tbody = document.getElementById('marksModalTableBody');
+            tbody.innerHTML = students.map(st => {
+                const currentObtained = (exam.marks && exam.marks[st.id] !== undefined) ? exam.marks[st.id] : '';
+                return `
+                    <tr class="hover:bg-black/10">
+                        <td class="py-2.5 px-3 font-bold">${st.rollNo}</td>
+                        <td class="py-2.5 px-3">${st.name}</td>
+                        <td class="py-2.5 px-3">
+                            <input type="number" max="${exam.totalMarks}" min="0" data-studentid="${st.id}" value="${currentObtained}" class="student-mark-input w-28 px-3 py-1.5 bg-black/30 border border-slate-700 rounded-xl text-xs text-current focus:outline-none focus:border-emerald-500" placeholder="e.g. 88">
+                        </td>
+                    </tr>
+                `;
+            }).join('');
+
+            document.getElementById('marksModal').classList.remove('hidden');
+        }
+
+        function closeMarksModal() {
+            document.getElementById('marksModal').classList.add('hidden');
+            activeMarksExamId = null;
+        }
+
+        function saveMarksEntry() {
+            if (!activeMarksExamId) return;
+
+            let exams = getExams();
+            const examIdx = exams.findIndex(e => e.id === activeMarksExamId);
+            if (examIdx === -1) return;
+
+            const inputs = document.querySelectorAll('.student-mark-input');
+            const newMarks = { ...(exams[examIdx].marks || {}) };
+
+            inputs.forEach(inp => {
+                const stId = inp.getAttribute('data-studentid');
+                const val = inp.value;
+                if (val !== '') {
+                    newMarks[stId] = parseFloat(val);
+                }
+            });
+
+            exams[examIdx].marks = newMarks;
+            localStorage.setItem('aps_exams', JSON.stringify(exams));
+            closeMarksModal();
+            alert('Student marks saved successfully!');
+        }
+
+        // RESULTS & REPORT CARD
+        function populateResultStudentDropdown() {
+            const dropdown = document.getElementById('resultStudentDropdown');
+            const students = getUsers().filter(u => u.role === 'student');
+
+            dropdown.innerHTML = students.map(s => `
+                <option value="${s.id}">${s.rollNo} - ${s.name} (${s.class})</option>
+            `).join('');
+
+            if (currentUser.role === 'student') {
+                renderStudentResultCard(currentUser.id);
+            } else if (students.length > 0) {
+                renderStudentResultCard(students[0].id);
+            }
+        }
+
+        function renderStudentResultCard(studentId) {
+            const student = getUsers().find(u => u.id === studentId);
+            if (!student) return;
+
+            document.getElementById('rcName').innerText = student.name;
+            document.getElementById('rcRoll').innerText = student.rollNo || '1001';
+            document.getElementById('rcClass').innerText = student.class || 'Class 1';
+
+            const exams = getExams().filter(e => e.class === student.class);
+            const tbody = document.getElementById('rcMarksTable');
+
+            if (exams.length === 0) {
+                tbody.innerHTML = `<tr><td colspan="5" class="text-center py-6 text-slate-500">No exam papers held for ${student.class} yet.</td></tr>`;
+                document.getElementById('rcGrade').innerText = 'N/A';
+                return;
+            }
+
+            let totalMax = 0;
+            let totalObtained = 0;
+
+            tbody.innerHTML = exams.map(e => {
+                const obtained = (e.marks && e.marks[student.id] !== undefined) ? e.marks[student.id] : null;
+                const pct = obtained !== null ? Math.round((obtained / e.totalMarks) * 100) : null;
+
+                if (obtained !== null) {
+                    totalMax += e.totalMarks;
+                    totalObtained += obtained;
+                }
+
+                return `
+                    <tr class="hover:bg-slate-50">
+                        <td class="py-2.5 px-3 font-bold text-slate-900">${e.subject}</td>
+                        <td class="py-2.5 px-3 text-slate-600">${e.date}</td>
+                        <td class="py-2.5 px-3 text-center font-bold">${e.totalMarks}</td>
+                        <td class="py-2.5 px-3 text-center font-bold ${obtained !== null ? 'text-emerald-700' : 'text-slate-400'}">${obtained !== null ? obtained : 'Pending'}</td>
+                        <td class="py-2.5 px-3 text-center font-bold">${pct !== null ? `${pct}%` : '--'}</td>
+                    </tr>
+                `;
+            }).join('');
+
+            const overallPct = totalMax > 0 ? (totalObtained / totalMax) * 100 : 0;
+            let grade = 'N/A';
+            if (totalMax > 0) {
+                if (overallPct >= 80) grade = 'A+';
+                else if (overallPct >= 70) grade = 'A';
+                else if (overallPct >= 60) grade = 'B';
+                else if (overallPct >= 50) grade = 'C';
+                else grade = 'F';
+            }
+            document.getElementById('rcGrade').innerText = grade;
+        }
+
+        // PROFILE UPDATE SYSTEM LOGIC
+        function loadProfileForm() {
+            if (!currentUser) return;
+
+            document.getElementById('profileHeaderName').innerText = `${currentUser.name} (${currentUser.role.toUpperCase()})`;
+            document.getElementById('profFullName').value = currentUser.name || '';
+            document.getElementById('profEmail').value = currentUser.email || '';
+            document.getElementById('profPhone').value = currentUser.phone || '';
+            document.getElementById('profEmergency').value = currentUser.emergency || '';
+            document.getElementById('profAvatarUrl').value = currentUser.avatar || '';
+            document.getElementById('profAddress').value = currentUser.address || '';
+
+            updateProfileAvatarPreview(currentUser.avatar);
+        }
+
+        function updateProfileAvatarPreview(url) {
+            const previewBox = document.getElementById('profileImagePreview');
+            if (url && url.trim() !== '') {
+                previewBox.innerHTML = `<img src="${url}" class="w-full h-full object-cover" onerror="this.src='https://placehold.co/100x100/10b981/ffffff?text=${currentUser.name.charAt(0)}'">`;
+            } else {
+                previewBox.innerText = currentUser.name.charAt(0);
+            }
+        }
+
+        function handleSaveProfile(e) {
+            e.preventDefault();
+            if (!currentUser) return;
+
+            let users = getUsers();
+            const idx = users.findIndex(u => u.id === currentUser.id);
+
+            if (idx > -1) {
+                users[idx].name = document.getElementById('profFullName').value.trim();
+                users[idx].phone = document.getElementById('profPhone').value.trim();
+                users[idx].emergency = document.getElementById('profEmergency').value.trim();
+                users[idx].avatar = document.getElementById('profAvatarUrl').value.trim();
+                users[idx].address = document.getElementById('profAddress').value.trim();
+
+                currentUser = users[idx];
+                localStorage.setItem('aps_users', JSON.stringify(users));
+                localStorage.setItem('aps_current_user', JSON.stringify(currentUser));
+
+                setupUserUI();
+                alert('Profile details updated successfully!');
+            }
+        }
+
+        // NOTICES & MESSAGING
+        function handleSendMessage(e) {
+            e.preventDefault();
+            if (currentUser.role !== 'admin') return;
+
+            let messages = getMessages();
+            const newMsg = {
+                id: 'MSG_' + Date.now(),
+                sender: `${currentUser.name} (Admin)`,
+                target: document.getElementById('msgTarget').value,
+                title: document.getElementById('msgTitle').value,
+                content: document.getElementById('msgContent').value,
+                date: new Date().toLocaleDateString() + ' ' + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })
+            };
+
+            messages.unshift(newMsg);
+            localStorage.setItem('aps_messages', JSON.stringify(messages));
+
+            document.getElementById('msgTitle').value = '';
+            document.getElementById('msgContent').value = '';
+            renderMessages();
+            updateDashboardStats();
+        }
+
+        function renderMessages() {
+            const messages = getMessages();
+            const container = document.getElementById('messagesList');
+
+            const filtered = messages.filter(m => {
+                if (m.target === 'all') return true;
+                if (currentUser.role === 'admin') return true;
+                if (currentUser.role === 'teacher' && m.target === 'teachers') return true;
+                if (currentUser.role === 'student' && m.target === 'students') return true;
+                return false;
+            });
+
+            if (filtered.length === 0) {
+                container.innerHTML = `<div class="theme-card p-6 rounded-2xl text-center opacity-60 text-xs">No notifications available.</div>`;
+                return;
+            }
+
+            container.innerHTML = filtered.map(m => `
+                <div class="theme-card p-5 rounded-2xl space-y-2">
+                    <div class="flex items-center justify-between">
+                        <span class="px-2.5 py-0.5 badge-accent text-[10px] font-extrabold rounded-full uppercase">Target: ${m.target}</span>
+                        <span class="text-[11px] opacity-70">${m.date}</span>
+                    </div>
+                    <h4 class="font-extrabold text-sm font-display">${m.title}</h4>
+                    <p class="text-xs opacity-80 leading-relaxed">${m.content}</p>
+                    <p class="text-[10px] opacity-60 pt-2 border-t border-slate-800/80">Posted by: <strong>${m.sender}</strong></p>
+                </div>
+            `).join('');
+        }
+
+        // USER DIRECTORY TABLE
+        function renderDirectoryTable() {
+            if (currentUser.role !== 'admin') return;
+
+            const filter = document.getElementById('directoryRoleFilter').value;
+            let users = getUsers();
+
+            if (filter !== 'all') {
+                users = users.filter(u => u.role === filter);
+            }
+
+            const tbody = document.getElementById('directoryTableBody');
+            tbody.innerHTML = users.map(u => `
+                <tr class="hover:bg-black/10">
+                    <td class="py-3 px-3 font-bold flex items-center space-x-2">
+                        <div class="w-6 h-6 rounded-full badge-accent flex items-center justify-center font-bold text-[10px] overflow-hidden">
+                            ${u.avatar ? `<img src="${u.avatar}" class="w-full h-full object-cover">` : u.name.charAt(0)}
+                        </div>
+                        <span>${u.name}</span>
+                    </td>
+                    <td class="py-3 px-3 opacity-80">${u.email}</td>
+                    <td class="py-3 px-3">
+                        <span class="px-2.5 py-0.5 rounded-md text-[10px] font-black uppercase ${u.role === 'admin' ? 'bg-purple-950 text-purple-400 border border-purple-800' : u.role === 'teacher' ? 'bg-blue-950 text-blue-400 border border-blue-800' : 'bg-emerald-950 text-emerald-400 border border-emerald-800'}">
+                            ${u.role}
+                        </span>
+                    </td>
+                    <td class="py-3 px-3 opacity-70">${u.class ? `${u.class} (Roll: ${u.rollNo})` : u.id}</td>
+                    <td class="py-3 px-3 font-mono text-accent font-bold">${u.password}</td>
+                </tr>
+            `).join('');
+        }
+
+        // ON PAGE LOAD INITIALIZATION
+        window.onload = function() {
+            loadSavedTheme();
+            initSeedData();
+            renderCredentialTabs();
+
+            const savedUser = localStorage.getItem('aps_current_user');
+            if (savedUser) {
+                currentUser = JSON.parse(savedUser);
+                document.getElementById('loginSection').classList.add('hidden');
+                document.getElementById('appSection').classList.remove('hidden');
+                setupUserUI();
+            }
+        };
+    </script>
+</body>
+</html>
